@@ -8,28 +8,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 [ExecuteInEditMode]
-public class SceneManagement : MonoBehaviour
+public class SceneManagement : Singleton<SceneManagement>
 {
-    static SceneManagement instance;
-    public static SceneManagement Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
-
-    private void Awake()
-    {
-        if( instance != this )
-        {
-            Destroy(this.gameObject);
-            return;
-        }
-        instance = this;
-        DontDestroyOnLoad(this);
-    }
-
     public static void SaveScene( string fileName )
     {
         GameObjectClass root = new GameObjectClass(EditorSceneManager.GetActiveScene().name);
