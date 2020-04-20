@@ -5,6 +5,7 @@ using UnityEngine;
 public class LevelEditorMain : Singleton<LevelEditorMain>
 {
     GameObject currentEditingObject;
+    List<GameObject> objectsInScene = new List<GameObject>();
     public void Update()
     {
         //if( currentEditingObject != null )
@@ -34,6 +35,19 @@ public class LevelEditorMain : Singleton<LevelEditorMain>
     public void BeginPrimitiveObject( GameObject primitiveObject )
     {
         if( primitiveObject != null )
-            Instantiate( primitiveObject );
+        {
+            var obj = Instantiate( primitiveObject );
+            objectsInScene.Add( obj );
+        }
+    }
+
+    public void SaveScene()
+    {
+
+    }
+
+    public void LoadScene()
+    {
+
     }
 }

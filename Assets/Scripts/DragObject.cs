@@ -18,13 +18,13 @@ public class DragObject : MonoBehaviour
         Vector3 mousePoint = Input.mousePosition;
         mousePoint.z = zCoord;
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint( mousePoint );
-        Debug.Log( "mousew world pos = " + mouseWorldPos );
+        //Debug.Log( "mousew world pos = " + mouseWorldPos );
         return mouseWorldPos;
     }
 
     private void OnMouseDrag()
     {
         transform.position = GetMouseWorldPos() + offset;
-        Debug.Log( "transform pos = " + transform.position );
+        //Debug.Log( "transform pos = " + transform.position );
     }
 }
