@@ -39,6 +39,8 @@ public class MoveCamera : MonoBehaviour
         if (Input.GetKey(KeyCode.S)){ transform.Translate(Vector3.back * cameraMovementSpeed * Time.deltaTime); }
         if (Input.GetKey(KeyCode.A)){ transform.Translate(Vector3.left * cameraMovementSpeed * Time.deltaTime); }
         if (Input.GetKey(KeyCode.D)){ transform.Translate(Vector3.right * cameraMovementSpeed * Time.deltaTime); }
+        if (Input.GetKey(KeyCode.Q)) { transform.Translate(Vector3.down * cameraMovementSpeed * Time.deltaTime); }
+        if (Input.GetKey(KeyCode.E)) { transform.Translate(Vector3.up * cameraMovementSpeed * Time.deltaTime); }
     }
 
     void MouseMovement()
