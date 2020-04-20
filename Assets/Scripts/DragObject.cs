@@ -6,12 +6,21 @@ public class DragObject : MonoBehaviour
 {
     Vector3 offset;
     float zCoord;
+    //private Color startcolor;
 
     private void OnMouseDown()
     {
         zCoord = Camera.main.WorldToScreenPoint( gameObject.transform.position ).z;
         offset = gameObject.transform.position - GetMouseWorldPos();
+
+        //startcolor = GetComponent<Renderer>().material.color;
+        //GetComponent<Renderer>().material.color = Color.yellow;
     }
+
+    //private void OnMouseUp()
+    //{
+    //    GetComponent<Renderer>().material.color = startcolor;
+    //}
 
     Vector3 GetMouseWorldPos()
     {

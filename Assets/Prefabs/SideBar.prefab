@@ -1529,7 +1529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
-  prefab: {fileID: 8410047871779897240, guid: ff97b4a4fdc0681438ef0edfbbbb5b0a, type: 3}
+  prefab: {fileID: 7589037918464785147, guid: a41c3b25360901f4c9bc5a981b73c3cc, type: 3}
 --- !u!1 &326803210788613602
 GameObject:
   m_ObjectHideFlags: 0
@@ -1865,7 +1865,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 3
-  prefab: {fileID: 8410047871779897240, guid: ff97b4a4fdc0681438ef0edfbbbb5b0a, type: 3}
+  prefab: {fileID: 6768472137735232495, guid: 7606cfbecc68b614d9094bae59758ab6, type: 3}
 --- !u!1 &326803211022057882
 GameObject:
   m_ObjectHideFlags: 0

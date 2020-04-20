@@ -403,7 +403,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeb9d3b1c68df394fb426c237d5668a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraSpeed: 10
+  cameraMovementSpeed: 10
+  cameraSpeedShiftMultiplier: 3
+  horizontalRotationSpeed: 2
+  verticalRotationSpeed: 2
 --- !u!224 &1119875780 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 326803210788613605, guid: 989daaf5e87952a44919f0d545d19f16,
