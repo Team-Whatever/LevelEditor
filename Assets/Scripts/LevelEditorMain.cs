@@ -12,6 +12,8 @@ public class LevelEditorMain : Singleton<LevelEditorMain>
     public GameObject[] primitiveObjects;
 
     GameObject currentXPos, currentYPos, currentZPos;
+    GameObject currentXRot, currentYRot, currentZRot;
+    GameObject currentXScale, currentYScale, currentZScale;
     public InspectorWindow inspector;
 
     public void Start()
@@ -19,6 +21,15 @@ public class LevelEditorMain : Singleton<LevelEditorMain>
         currentXPos = GameObject.Find("PosX");
         currentYPos = GameObject.Find("PosY");
         currentZPos = GameObject.Find("PosZ");
+
+        currentXRot = GameObject.Find("RotX");
+        currentYRot = GameObject.Find("RotY");
+        currentZRot = GameObject.Find("RotZ");
+
+        currentXRot = GameObject.Find("ScaleX");
+        currentYRot = GameObject.Find("ScaleY");
+        currentZRot = GameObject.Find("ScaleZ"); 
+
     }
 
     public void Update()
@@ -38,22 +49,8 @@ public class LevelEditorMain : Singleton<LevelEditorMain>
                 }
                 else
                 {
-                    currentEditingObject = null;
+                    currentEditingObject = null; 
                 }
-                //Debug.Log(currentXPos.transform.childCount);
-                ////GameObject xPosString = currentXPos.transform.Find("Text"); 
-                //for (int i = 0; i < currentXPos.transform.childCount - 1; i++)
-                //{
-                //     //Debug.Log(currentXPos.transform.GetChild(i).transform.name);
-                //    Debug.Log(currentXPos.transform.GetChild(i).transform.name);
-                //    if (currentXPos.transform.GetChild(i).transform.name.ToString() == "Text") {
-                //        currentXPos.transform.GetChild(i).transform.GetComponent<UnityEngine.UI.InputField>().text = "00";
-                //        //currentXPos.transform.GetChild(i).transform.GetComponent<Text>().text = "00"; 
-                //         currentEditingObject.transform.localPosition.x.ToString();
-                //         Debug.Log("got it"); 
-                //     }
-                //}
-                //Debug.Log(currentEditingObject.transform.localPosition.x.ToString());
             }
             else
             {
