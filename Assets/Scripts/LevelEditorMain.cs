@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -23,6 +24,8 @@ public class LevelEditorMain : Singleton<LevelEditorMain>
     {
         if (Input.GetMouseButtonDown(0))
         {
+            if( EventSystem.current.currentSelectedGameObject != null || EventSystem.current.IsPointerOverGameObject() )
+                return;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitInfo;
             if (Physics.Raycast(ray, out hitInfo))
@@ -31,7 +34,10 @@ public class LevelEditorMain : Singleton<LevelEditorMain>
                 if( go.tag == "Primitive" )
                 {
                     currentEditingObject = go;
-                    inspector.SetGameObject( currentEditingObject );
+                }
+                else
+                {
+                    currentEditingObject = null;
                 }
                 //Debug.Log(currentXPos.transform.childCount);
                 ////GameObject xPosString = currentXPos.transform.Find("Text"); 
@@ -50,8 +56,9 @@ public class LevelEditorMain : Singleton<LevelEditorMain>
             }
             else
             {
-
+                currentEditingObject = null;
             }
+            inspector.SetGameObject( currentEditingObject );
         }
     }
 

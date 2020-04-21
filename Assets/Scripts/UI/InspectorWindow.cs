@@ -15,10 +15,25 @@ public class InspectorWindow : MonoBehaviour
     public void SetGameObject( GameObject obj )
     {
         targetObject = obj;
-        title.text = obj.name;
-        posX.text = obj.transform.position.x.ToString();
-        posY.text = obj.transform.position.y.ToString();
-        posZ.text = obj.transform.position.z.ToString();
+    }
+
+    public void Update()
+    {
+        if( targetObject != null )
+        {
+            title.text = targetObject.name;
+            posX.text = targetObject.transform.position.x.ToString();
+            posY.text = targetObject.transform.position.y.ToString();
+            posZ.text = targetObject.transform.position.z.ToString();
+        }
+        else
+        {
+            title.text = string.Empty;
+            posX.text = string.Empty;
+            posY.text = string.Empty;
+            posZ.text = string.Empty;
+        }
+        
     }
 
 }
