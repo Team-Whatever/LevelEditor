@@ -20,6 +20,10 @@ public class InspectorWindow : MonoBehaviour
 
     private void Awake()
     {
+        posX.onEndEdit.AddListener( OnPosXChanged );
+        posY.onEndEdit.AddListener( OnPosYChanged );
+        posZ.onEndEdit.AddListener( OnPosZChanged );
+
         scaleX.onEndEdit.AddListener( OnScaleXChanged );
         scaleY.onEndEdit.AddListener( OnScaleYChanged );
         scaleZ.onEndEdit.AddListener( OnScaleZChanged );
@@ -63,48 +67,70 @@ public class InspectorWindow : MonoBehaviour
         }
     }
 
-    public void OnScaleXChanged( string newValue )
+    public void OnPosXChanged( string newValue )
     {
-        Debug.Log( "new value = " + newValue );
+        OnPosChanged( 0, newValue );
+    }
+
+    public void OnPosYChanged( string newValue )
+    {
+        OnPosChanged( 1, newValue );
+    }
+
+    public void OnPosZChanged( string newValue )
+    {
+        OnPosChanged( 2, newValue );
+    }
+
+    public void OnPosChanged( int axis, string newValue )
+    {
         if( targetObject != null )
         {
-            float newScale;
-            if( float.TryParse( newValue, out newScale ) )
+            float newPos;
+            if( float.TryParse( newValue, out newPos ) )
             {
-                Vector3 newScaleVector = targetObject.transform.localScale;
-                newScaleVector.x = newScale;
-                targetObject.transform.localScale = newScaleVector;
+                Vector3 newPosVector = targetObject.transform.localPosition;
+                if( axis == 0 )
+                    newPosVector.x = newPos;
+                else if( axis == 1 )
+                    newPosVector.y = newPos;
+                else if( axis == 2 )
+                    newPosVector.z = newPos;
+                targetObject.transform.localPosition = newPosVector;
                 UpdateUI();
             }
         }
+    }
+
+    public void OnScaleXChanged( string newValue )
+    {
+        OnScaleChanged( 0, newValue );
     }
 
     public void OnScaleYChanged( string newValue )
     {
-        Debug.Log( "new value = " + newValue );
-        if( targetObject != null )
-        {
-            float newScale;
-            if( float.TryParse( newValue, out newScale ) )
-            {
-                Vector3 newScaleVector = targetObject.transform.localScale;
-                newScaleVector.y = newScale;
-                targetObject.transform.localScale = newScaleVector;
-                UpdateUI();
-            }
-        }
+        OnScaleChanged( 1, newValue );
     }
 
     public void OnScaleZChanged( string newValue )
     {
-        Debug.Log( "new value = " + newValue );
+        OnScaleChanged( 2, newValue );
+    }
+
+    public void OnScaleChanged( int axis, string newValue )
+    {
         if( targetObject != null )
         {
             float newScale;
             if( float.TryParse( newValue, out newScale ) )
             {
                 Vector3 newScaleVector = targetObject.transform.localScale;
-                newScaleVector.z = newScale;
+                if( axis == 0 )
+                    newScaleVector.x = newScale;
+                else if( axis == 1 )
+                    newScaleVector.y = newScale;
+                else if( axis == 2 )
+                    newScaleVector.z = newScale;
                 targetObject.transform.localScale = newScaleVector;
                 UpdateUI();
             }
