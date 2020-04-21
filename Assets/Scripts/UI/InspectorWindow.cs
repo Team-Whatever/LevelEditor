@@ -24,6 +24,10 @@ public class InspectorWindow : MonoBehaviour
         posY.onEndEdit.AddListener( OnPosYChanged );
         posZ.onEndEdit.AddListener( OnPosZChanged );
 
+        rotX.onEndEdit.AddListener( OnRotXChanged );
+        rotY.onEndEdit.AddListener( OnRotYChanged );
+        rotZ.onEndEdit.AddListener( OnRotZChanged );
+
         scaleX.onEndEdit.AddListener( OnScaleXChanged );
         scaleY.onEndEdit.AddListener( OnScaleYChanged );
         scaleZ.onEndEdit.AddListener( OnScaleZChanged );
@@ -97,6 +101,41 @@ public class InspectorWindow : MonoBehaviour
                 else if( axis == 2 )
                     newPosVector.z = newPos;
                 targetObject.transform.localPosition = newPosVector;
+                UpdateUI();
+            }
+        }
+    }
+
+    public void OnRotXChanged( string newValue )
+    {
+        OnRotChanged( 0, newValue );
+    }
+
+    public void OnRotYChanged( string newValue )
+    {
+        OnRotChanged( 1, newValue );
+    }
+
+    public void OnRotZChanged( string newValue )
+    {
+        OnRotChanged( 2, newValue );
+    }
+
+    public void OnRotChanged( int axis, string newValue )
+    {
+        if( targetObject != null )
+        {
+            float newRot;
+            if( float.TryParse( newValue, out newRot ) )
+            {
+                Vector3 newRotVector = targetObject.transform.localEulerAngles;
+                if( axis == 0 )
+                    newRotVector.x = newRot;
+                else if( axis == 1 )
+                    newRotVector.y = newRot;
+                else if( axis == 2 )
+                    newRotVector.z = newRot;
+                targetObject.transform.localEulerAngles = newRotVector;
                 UpdateUI();
             }
         }
