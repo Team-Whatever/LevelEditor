@@ -101,7 +101,8 @@ public class LevelEditorMain : Singleton<LevelEditorMain>
         var primitiveObj = go.GetComponent<PrimitiveObject>();
         if( primitiveObj != null )
         {
-            parent.Type = primitiveObj.type.ToString();
+            parent.Type = "Primitive";
+            parent.SubType = primitiveObj.type.ToString();
         }
         for( var i = 0; i < go.transform.childCount; i++ )
         {
@@ -126,7 +127,7 @@ public class LevelEditorMain : Singleton<LevelEditorMain>
 
             foreach( var childClass in root.children )
             {
-                GameObject prefab = GetPrefab( childClass.Type );
+                GameObject prefab = GetPrefab( childClass.Type, childClass.SubType );
                 GameObject childGO;
                 if( prefab != null )
                 {
@@ -151,7 +152,7 @@ public class LevelEditorMain : Singleton<LevelEditorMain>
     {
         foreach( var childClass in goc.children )
         {
-            GameObject prefab = GetPrefab( childClass.Type );
+            GameObject prefab = GetPrefab( childClass.Type, childClass.SubType );
             GameObject childGO;
             if( prefab != null )
             {
@@ -172,15 +173,18 @@ public class LevelEditorMain : Singleton<LevelEditorMain>
         }
     }
 
-    GameObject GetPrefab( string objType )
+    GameObject GetPrefab( string objType, string subType )
     {
-        foreach( var po in primitiveObjects )
+        if( objType == "Primitive" )
         {
-            if( po.GetComponent<PrimitiveObject>() != null )
+            foreach( var po in primitiveObjects )
             {
-                if( po.GetComponent<PrimitiveObject>().type.ToString() == objType )
+                if( po.GetComponent<PrimitiveObject>() != null )
                 {
-                    return po;
+                    if( po.GetComponent<PrimitiveObject>().type.ToString() == subType )
+                    {
+                        return po;
+                    }
                 }
             }
         }

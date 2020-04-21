@@ -25,6 +25,7 @@ public class GameObjectClass
 
     public string Name;
     public string Type;
+    public string SubType;
     public TransformClass transformClass;
     public List<ComponentClass> components = new List<ComponentClass>();
     public List<GameObjectClass> children = new List<GameObjectClass>();
