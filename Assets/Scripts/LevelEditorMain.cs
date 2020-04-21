@@ -10,26 +10,10 @@ public class LevelEditorMain : Singleton<LevelEditorMain>
     GameObject currentEditingObject;
     List<GameObject> objectsInScene = new List<GameObject>();
     public GameObject[] primitiveObjects;
-
-    GameObject currentXPos, currentYPos, currentZPos;
-    GameObject currentXRot, currentYRot, currentZRot;
-    GameObject currentXScale, currentYScale, currentZScale;
     public InspectorWindow inspector;
 
     public void Start()
     {
-        currentXPos = GameObject.Find("PosX");
-        currentYPos = GameObject.Find("PosY");
-        currentZPos = GameObject.Find("PosZ");
-
-        currentXRot = GameObject.Find("RotX");
-        currentYRot = GameObject.Find("RotY");
-        currentZRot = GameObject.Find("RotZ");
-
-        currentXRot = GameObject.Find("ScaleX");
-        currentYRot = GameObject.Find("ScaleY");
-        currentZRot = GameObject.Find("ScaleZ"); 
-
     }
 
     public void Update()
@@ -58,6 +42,11 @@ public class LevelEditorMain : Singleton<LevelEditorMain>
             }
             inspector.SetGameObject( currentEditingObject );
         }
+    }
+
+    public void UpdateInspector()
+    {
+        inspector.UpdateUI();
     }
 
     public void BeginPrimitiveObject( GameObject primitiveObject )

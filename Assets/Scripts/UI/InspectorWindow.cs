@@ -18,12 +18,20 @@ public class InspectorWindow : MonoBehaviour
     public InputField scaleY;
     public InputField scaleZ;
 
+    private void Awake()
+    {
+        scaleX.onEndEdit.AddListener( OnScaleXChanged );
+        scaleY.onEndEdit.AddListener( OnScaleYChanged );
+        scaleZ.onEndEdit.AddListener( OnScaleZChanged );
+    }
+
     public void SetGameObject( GameObject obj )
     {
         targetObject = obj;
+
     }
 
-    public void Update()
+    public void UpdateUI()
     {
         if( targetObject != null )
         {
@@ -52,6 +60,54 @@ public class InspectorWindow : MonoBehaviour
             scaleX.text = string.Empty;
             scaleY.text = string.Empty;
             scaleZ.text = string.Empty; 
+        }
+    }
+
+    public void OnScaleXChanged( string newValue )
+    {
+        Debug.Log( "new value = " + newValue );
+        if( targetObject != null )
+        {
+            float newScale;
+            if( float.TryParse( newValue, out newScale ) )
+            {
+                Vector3 newScaleVector = targetObject.transform.localScale;
+                newScaleVector.x = newScale;
+                targetObject.transform.localScale = newScaleVector;
+                UpdateUI();
+            }
+        }
+    }
+
+    public void OnScaleYChanged( string newValue )
+    {
+        Debug.Log( "new value = " + newValue );
+        if( targetObject != null )
+        {
+            float newScale;
+            if( float.TryParse( newValue, out newScale ) )
+            {
+                Vector3 newScaleVector = targetObject.transform.localScale;
+                newScaleVector.y = newScale;
+                targetObject.transform.localScale = newScaleVector;
+                UpdateUI();
+            }
+        }
+    }
+
+    public void OnScaleZChanged( string newValue )
+    {
+        Debug.Log( "new value = " + newValue );
+        if( targetObject != null )
+        {
+            float newScale;
+            if( float.TryParse( newValue, out newScale ) )
+            {
+                Vector3 newScaleVector = targetObject.transform.localScale;
+                newScaleVector.z = newScale;
+                targetObject.transform.localScale = newScaleVector;
+                UpdateUI();
+            }
         }
     }
 

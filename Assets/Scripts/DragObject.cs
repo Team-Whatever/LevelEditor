@@ -35,5 +35,6 @@ public class DragObject : MonoBehaviour
     {
         transform.position = GetMouseWorldPos() + offset;
         //Debug.Log( "transform pos = " + transform.position );
+        LevelEditorMain.Instance.UpdateInspector();
     }
 }
