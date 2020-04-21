@@ -19,14 +19,17 @@ public class LeftPanel : MonoBehaviour
     public void OnSceneLoad()
     {
         var paths = StandaloneFileBrowser.OpenFilePanel( "Open File", "", "scene", false );
-        if( paths.Length > 0 )
-            Debug.Log( "load path = " + paths[0] );
+        if( paths.Length > 0 && paths[0].Length > 0 )
+        {
+            LevelEditorMain.Instance.LoadScene( paths[0] );
+        }
     }
 
     public void OnSceneSave()
     {
         var path = StandaloneFileBrowser.SaveFilePanel( "Save File", "", "noname", "scene" );
-        Debug.Log( "save path = " + path );
+        if( path.Length > 0 )
+            LevelEditorMain.Instance.SaveScene( path );
     }
 
     public void OnPrimitiveClicked( GameObject buttonObject )
