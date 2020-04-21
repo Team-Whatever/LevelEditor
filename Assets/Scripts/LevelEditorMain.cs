@@ -9,6 +9,7 @@ public class LevelEditorMain : Singleton<LevelEditorMain>
 {
     GameObject currentEditingObject;
     List<GameObject> objectsInScene = new List<GameObject>();
+    public GameObject[] primitiveObjects;
 
     GameObject currentXPos, currentYPos, currentZPos;
     public InspectorWindow inspector;
@@ -71,36 +72,39 @@ public class LevelEditorMain : Singleton<LevelEditorMain>
         }
     }
 
+    public void ClearScene()
+    {
+        foreach( var obj in objectsInScene )
+        {
+            Destroy( obj );
+        }
+        objectsInScene.Clear();
+    }
+
     public void SaveScene( string filepath )
     {
         string filename = System.IO.Path.GetFileNameWithoutExtension( filepath );
 
         GameObjectClass root = new GameObjectClass( filename );
-        foreach( object o in objectsInScene )
+        root.Type = "Scene";
+        foreach( var go in objectsInScene )
         {
-            GameObject go = ( GameObject )o;
             GameObjectClass childGO = new GameObjectClass( go );
             root.children.Add( childGO );
             SaveObject( go, childGO );
         }
-
-        JsonConvert.DefaultSettings = () => new JsonSerializerSettings
-        {
-            TypeNameHandling = TypeNameHandling.All
-        };
 
         JsonConverter[] converters = new JsonConverter[] { new VectorConverter(), new QuaternionConverter(), new Matrix4x4Converter(), new ColorConverter() };
         string jsonText = JsonConvert.SerializeObject( root, Formatting.Indented, converters );
         System.IO.File.WriteAllText( filepath, jsonText );
     }
 
-    static void SaveObject( GameObject go, GameObjectClass parent )
+    void SaveObject( GameObject go, GameObjectClass parent )
     {
-        Component[] comps = go.GetComponents<Component>();
-        foreach( var comp in comps )
+        var primitiveObj = go.GetComponent<PrimitiveObject>();
+        if( primitiveObj != null )
         {
-            ComponentClass childComp = ComponentFactory.CreateComponentClass( comp );
-            parent.components.Add( childComp );
+            parent.Type = primitiveObj.type.ToString();
         }
         for( var i = 0; i < go.transform.childCount; i++ )
         {
@@ -114,6 +118,56 @@ public class LevelEditorMain : Singleton<LevelEditorMain>
 
     public void LoadScene( string filepath )
     {
+        string jsonText = System.IO.File.ReadAllText( filepath );
+        var settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+        GameObjectClass root = JsonConvert.DeserializeObject<GameObjectClass>( jsonText, settings );
+        //GameObjectClass root = JsonUtility.FromJson<GameObjectClass>( jsonText );
 
+        if( root != null )
+        {
+            ClearScene();
+
+            LoadObject( null, root );
+        }
+    }
+
+    void LoadObject( GameObject parent, GameObjectClass goc )
+    {
+        foreach( var childClass in goc.children )
+        {
+            GameObject prefab = GetPrefab( childClass.Type );
+            GameObject childGO;
+            if( prefab != null )
+            {
+                childGO = Instantiate( prefab );
+            }
+            else
+            {
+                childGO = new GameObject( childClass.Name );
+            }
+
+            if( parent != null )
+                childGO.transform.parent = parent.transform;
+            childGO.transform.localPosition = childClass.transformClass.position;
+            childGO.transform.localScale = childClass.transformClass.scale;
+            childGO.transform.localRotation = childClass.transformClass.rotation;
+
+            LoadObject( childGO, childClass );
+        }
+    }
+
+    GameObject GetPrefab( string objType )
+    {
+        foreach( var po in primitiveObjects )
+        {
+            if( po.GetComponent<PrimitiveObject>() != null )
+            {
+                if( po.GetComponent<PrimitiveObject>().type.ToString() == objType )
+                {
+                    return po;
+                }
+            }
+        }
+        return null;
     }
 }

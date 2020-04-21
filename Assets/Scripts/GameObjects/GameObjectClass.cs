@@ -16,7 +16,7 @@ public class GameObjectClass
         Type = typeof(GameObject).ToString();
     }
 
-    public GameObjectClass(GameObject go )
+    public GameObjectClass( GameObject go )
     {
         Name = go.name;
         Type = go.GetType().ToString();

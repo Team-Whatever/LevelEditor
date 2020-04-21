@@ -16,6 +16,11 @@ public enum PrimitiveType
 
 public class LeftPanel : MonoBehaviour
 {
+    public void OnSceneNew()
+    {
+        LevelEditorMain.Instance.ClearScene();
+    }
+
     public void OnSceneLoad()
     {
         var paths = StandaloneFileBrowser.OpenFilePanel( "Open File", "", "scene", false );
@@ -32,10 +37,9 @@ public class LeftPanel : MonoBehaviour
             LevelEditorMain.Instance.SaveScene( path );
     }
 
-    public void OnPrimitiveClicked( GameObject buttonObject )
+    public void OnPrimitiveClicked( GameObject prefab )
     {
-        GameObject primitiveObject = buttonObject.GetComponent<PrimitiveObject>().prefab;
-        LevelEditorMain.Instance.BeginPrimitiveObject( primitiveObject );
+        LevelEditorMain.Instance.BeginPrimitiveObject( prefab );
     }
 
     public void OnPlaneClicked()
