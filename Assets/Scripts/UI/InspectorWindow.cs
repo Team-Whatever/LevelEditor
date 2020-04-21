@@ -11,6 +11,12 @@ public class InspectorWindow : MonoBehaviour
     public InputField posX;
     public InputField posY;
     public InputField posZ;
+    public InputField rotX;
+    public InputField rotY;
+    public InputField rotZ;
+    public InputField scaleX;
+    public InputField scaleY;
+    public InputField scaleZ;
 
     public void SetGameObject( GameObject obj )
     {
@@ -25,6 +31,14 @@ public class InspectorWindow : MonoBehaviour
             posX.text = targetObject.transform.position.x.ToString();
             posY.text = targetObject.transform.position.y.ToString();
             posZ.text = targetObject.transform.position.z.ToString();
+
+            rotX.text = targetObject.transform.eulerAngles.x.ToString();
+            rotY.text = targetObject.transform.eulerAngles.y.ToString();
+            rotZ.text = targetObject.transform.eulerAngles.z.ToString();
+
+            scaleX.text = targetObject.transform.localScale.x.ToString();
+            scaleY.text = targetObject.transform.localScale.y.ToString();
+            scaleZ.text = targetObject.transform.localScale.z.ToString();
         }
         else
         {
@@ -32,8 +46,13 @@ public class InspectorWindow : MonoBehaviour
             posX.text = string.Empty;
             posY.text = string.Empty;
             posZ.text = string.Empty;
+            rotX.text = string.Empty;
+            rotY.text = string.Empty;
+            rotZ.text = string.Empty;
+            scaleX.text = string.Empty;
+            scaleY.text = string.Empty;
+            scaleZ.text = string.Empty; 
         }
-        
     }
 
 }
