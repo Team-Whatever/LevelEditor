@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 620253028519277379}
   - component: {fileID: 7029055739677685755}
   - component: {fileID: 8178997333749636517}
+  - component: {fileID: 5504840503699238967}
   m_Layer: 0
   m_Name: Torus
   m_TagString: Primitive
@@ -11661,3 +11662,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66edac31aecbbd844a01cc4046990964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5504840503699238967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7589037918464785147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92a6bb3645c0aed40906962908c89b2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 4

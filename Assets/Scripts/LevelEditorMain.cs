@@ -124,7 +124,26 @@ public class LevelEditorMain : Singleton<LevelEditorMain>
         {
             ClearScene();
 
-            LoadObject( null, root );
+            foreach( var childClass in root.children )
+            {
+                GameObject prefab = GetPrefab( childClass.Type );
+                GameObject childGO;
+                if( prefab != null )
+                {
+                    childGO = Instantiate( prefab );
+                }
+                else
+                {
+                    childGO = new GameObject( childClass.Name );
+                }
+
+                childGO.transform.localPosition = childClass.transformClass.position;
+                childGO.transform.localScale = childClass.transformClass.scale;
+                childGO.transform.localRotation = childClass.transformClass.rotation;
+
+                LoadObject( childGO, childClass );
+                objectsInScene.Add( childGO );
+            }
         }
     }
 
