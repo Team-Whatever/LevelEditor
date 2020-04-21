@@ -38,29 +38,19 @@ public class LevelEditorMain : Singleton<LevelEditorMain>
                if (Physics.Raycast(ray, out hitInfo))
                {
                    currentEditingObject = hitInfo.transform.gameObject;
-                   currentEditingObject.AddComponent<DragObject>();
-                   Debug.Log(hitInfo.transform.gameObject);
-
-                   Debug.Log(currentXPos.transform.childCount);
-
-                   //GameObject xPosString = currentXPos.transform.Find("Text"); 
-
-                   for (int i = 0; i < currentXPos.transform.childCount - 1; i++)
-                   {
-                        //Debug.Log(currentXPos.transform.GetChild(i).transform.name);
-
-                        Debug.Log(currentXPos.transform.GetChild(i).transform.name);
-                       if (currentXPos.transform.GetChild(i).transform.name.ToString() == "Text") {
-                           currentXPos.transform.GetChild(i).transform.GetComponent<UnityEngine.UI.InputField>().text = "00";
-                           //currentXPos.transform.GetChild(i).transform.GetComponent<Text>().text = "00"; 
-
-                            currentEditingObject.transform.localPosition.x.ToString();
-                            Debug.Log("got it"); 
-
-                        
-                    }
-                   }
-
+                   //Debug.Log(currentXPos.transform.childCount);
+                   ////GameObject xPosString = currentXPos.transform.Find("Text"); 
+                   //for (int i = 0; i < currentXPos.transform.childCount - 1; i++)
+                   //{
+                   //     //Debug.Log(currentXPos.transform.GetChild(i).transform.name);
+                   //    Debug.Log(currentXPos.transform.GetChild(i).transform.name);
+                   //    if (currentXPos.transform.GetChild(i).transform.name.ToString() == "Text") {
+                   //        currentXPos.transform.GetChild(i).transform.GetComponent<UnityEngine.UI.InputField>().text = "00";
+                   //        //currentXPos.transform.GetChild(i).transform.GetComponent<Text>().text = "00"; 
+                   //         currentEditingObject.transform.localPosition.x.ToString();
+                   //         Debug.Log("got it"); 
+                   //     }
+                   //}
                    Debug.Log(currentEditingObject.transform.localPosition.x.ToString());
                }
            }
