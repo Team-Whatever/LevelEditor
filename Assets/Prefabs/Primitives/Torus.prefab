@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8178997333749636517}
   m_Layer: 0
   m_Name: Torus
-  m_TagString: Untagged
+  m_TagString: Primitive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
